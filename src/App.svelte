@@ -1,6 +1,8 @@
 <script>
   import mapboxgl from 'mapbox-gl';
   import { onMount } from 'svelte';
+
+  import Layout from './components/Layout.svelte';
   mapboxgl.accessToken = 'pk.eyJ1IjoicGl4ZWxtb3JkIiwiYSI6ImNrODdpazd3NDAyMWQzcG4zbXBxa3g1MG0ifQ.KUT3Lkd1wZnbRHTpWm2_tw';
   onMount(() => {
     // eslint-disable-next-line no-unused-vars
@@ -14,9 +16,9 @@
   });
 </script>
 
-<main>
+<Layout>
   <div id="map" class="map"></div>
-</main>
+</Layout>
 
 <style>
   main {

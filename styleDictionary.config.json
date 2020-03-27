@@ -1,0 +1,25 @@
+{
+  "source": ["src/prestyled/properties/**/*.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "src/prestyled/style/",
+      "files": [
+        {
+          "destination": "_variables.scss",
+          "format": "scss/variables"
+        }
+      ]
+    },
+    "js": {
+      "buildPath": "src/prestyled/theme/",
+      "transformGroup": "styled-system",
+      "files": [
+        {
+          "destination": "index.js",
+          "format": "styled-system"
+        }
+      ]
+    }
+  }
+}
