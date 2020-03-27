@@ -4,9 +4,17 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import autoPreprocess from 'svelte-preprocess'
-
+import dotenv from 'dotenv';
+import replace from '@rollup/plugin-replace';
 const production = !process.env.ROLLUP_WATCH;
 
+const env = dotenv.config().parsed
+
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next])
+  return prev
+}, {})
+const mode = process.env.NODE_ENV
 export default {
   input: 'src/main.js',
   output: {
@@ -16,6 +24,11 @@ export default {
     file: 'public/build/bundle.js'
   },
   plugins: [
+    replace({
+      'process.browser': true,
+      'process.env.NODE_ENV': JSON.stringify(mode),
+      ...envKeys,
+    }),
     svelte({
       // enable run-time checks when not in production
       dev: !production,

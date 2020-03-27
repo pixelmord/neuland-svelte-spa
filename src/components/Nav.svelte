@@ -1,11 +1,23 @@
 <script>
-  export let segment;
+  import firebase, { app, loggedIn$ } from '../firebase';
+
+  const logIn = () => {
+    const authProvider = new firebase.auth.GoogleAuthProvider();
+    app.auth().signInWithPopup(authProvider);
+  };
+  const logOut = async () => {
+    await firebase.auth().signOut();
+  };
 </script>
 
 <nav>
   <ul>
     <li>
-      <a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a>
+      {#if $loggedIn$}
+        <button on:click="{logOut}">Log Out</button>
+      {:else}
+        <button on:click="{logIn}">Log In</button>
+      {/if}
     </li>
   </ul>
 </nav>
